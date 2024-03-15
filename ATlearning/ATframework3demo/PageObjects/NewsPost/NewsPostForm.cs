@@ -22,4 +22,5 @@ namespace ATframework3demo.PageObjects.NewsPost
             //Опубликовать пост, нажав на кнопку "отправить"
             throw new NotImplementedException();
         }
+    }
 }

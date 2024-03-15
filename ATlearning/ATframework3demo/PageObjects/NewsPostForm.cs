@@ -16,5 +16,11 @@ namespace ATframework3demo.PageObjects
                 $"Ожидание появления строки '{recipientName}' в '{recipientsArea.Description}'");
             return isRecipientPresent;
         }
+
+        public NewsPage SendPost()
+        {
+            //отправить сообщение в новостную ленту нажатием соответствующей кнопки)
+            throw new NotImplementedException();
+        }
     }
 }

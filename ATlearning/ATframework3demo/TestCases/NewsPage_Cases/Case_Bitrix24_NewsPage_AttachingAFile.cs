@@ -24,7 +24,7 @@ namespace ATframework3demo.TestCases.NewsPage_Cases
                 //Опубликовать пост
                 .SendPost()
             //Обновить страницу, проверить наличие загруженного файла на странице
-                .Assert_Case_Bitrix24_NewsPage_AttachingAFile()
+                .Assert_Case_Bitrix24_NewsPage_AttachingAFile();
 
 
 

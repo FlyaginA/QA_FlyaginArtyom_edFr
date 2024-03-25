@@ -1,5 +1,6 @@
 ﻿using atFrameWork2.SeleniumFramework;
 using ATframework3demo.PageObjects;
+using ATframework3demo.PageObjects.Drive;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,15 @@ namespace atFrameWork2.PageObjects
             var btnNews = new WebItem("//li[@id='bx_left_menu_menu_live_feed']", "Пункт левого меню Новости");
             ClickMenuItem(btnNews);
             return new NewsPage();
+        }
+
+        public MyDrive Drive()
+        {
+            //клик в пункт Диск
+            new WebItem("//li[@id=\"bx_left_menu_menu_files\"]", "Пункт левого меню Диск")
+                .Click();
+
+            return new MyDrive();
         }
     }
 }

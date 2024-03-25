@@ -1,6 +1,6 @@
 ﻿using atFrameWork2.SeleniumFramework;
 
-namespace ATframework3demo.PageObjects.NewsPost
+namespace ATframework3demo.PageObjects
 {
     /// <summary>
     /// Поле для прикрепление файла, которое не обладает стандартным инпутом типа файл. Пример такого поля в форме прикрепления файла у посту живой ленты.
@@ -10,7 +10,8 @@ namespace ATframework3demo.PageObjects.NewsPost
     {
         const string inputId = "ui-tile-uploader-file-proxy";
 
-        string fakeFileJS = @"(function(targetSelector) {
+        string fakeFileJS
+            = @"(function(targetSelector) {
                 const dropFile = (target, file) => {
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
@@ -31,7 +32,7 @@ namespace ATframework3demo.PageObjects.NewsPost
                 };
                 document.body.appendChild(input);
                 })";
-
+        
         string dropZoneClass;
 
         /// <summary>
@@ -48,11 +49,12 @@ namespace ATframework3demo.PageObjects.NewsPost
         {
             if (File.Exists(localFileAbsolutePath))
             {
-                SeleniumFramework.DriverActions.BaseDriverActions.ExecuteJS(fakeFileJS);
-                new WebItem($"//input[@id='{inputId}']", "Фейковый инпут для ввода пути к файлу").SendKeys(localFileAbsolutePath);
+                WebDriverActions.ExecuteJS(fakeFileJS);
+                new WebItem($"//input[@id='{inputId}']", "Фейковый инпут для ввода пути к файлу").SendKeys(localFileAbsolutePath); 
             }
             else
                 throw new FileNotFoundException(localFileAbsolutePath + " не найден");
+            
         }
     }
 }

@@ -11,16 +11,18 @@ namespace ATframework3demo.PageObjects.Mobile
 
         public MobileHomePage Login(User admin)
         {
-            var enterAddresBtn = new MobileItem("//android.widget.TextView[@content-desc='authFormEnterAddressButton']",
+
+            var enterAddresBtn = new MobileItem("//android.widget.TextView[@resource-id=\"com.bitrix24.android:id/btnAddPortal\"]",
                 "Кнопка 'введите адрес'");
-            var portalAddresField = new MobileItem("//android.widget.EditText[@content-desc='signInPortalInput']",
+            var portalAddresField = new MobileItem("//android.widget.EditText[@resource-id=\"com.bitrix24.android:id/input\"]",
                 "Поле для ввода адреса портала");
-            var loginField = new MobileItem("//android.widget.EditText[@content-desc='signInPortalFormPhoneInput']",
+            var loginField = new MobileItem("//android.widget.EditText[@resource-id=\"com.bitrix24.android:id/input\"]",
                 "Поле для ввода логина");
-            var pwdField = new MobileItem("//android.widget.EditText[@content-desc='passwordFormInput']",
+            var pwdField = new MobileItem("//android.widget.EditText[@resource-id=\"com.bitrix24.android:id/input\"]",
                 "Поле для ввода пароля");
             var nextBtn = new MobileItem("//android.widget.Button[@resource-id='com.bitrix24.android:id/btnNext']",
                 "Кнопка 'Далее'");
+
 
             // переходим к форме ввода адреса портала
             enterAddresBtn.Click();

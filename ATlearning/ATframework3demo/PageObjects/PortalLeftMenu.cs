@@ -1,6 +1,7 @@
 ﻿using atFrameWork2.SeleniumFramework;
 using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects.Drive;
+using ATframework3demo.PageObjects.WorkGroups;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,14 @@ namespace atFrameWork2.PageObjects
                 .Click();
 
             return new MyDrive();
+        }
+
+        public WorkGroupsPage WorkGroups()
+        {
+            //клик в пункт "Группы"
+            new WebItem("//li [@id = \"bx_left_menu_menu_all_groups\"]", "Пункт левого меню Группы")
+                .Click();
+            return new WorkGroupsPage();
         }
     }
 }

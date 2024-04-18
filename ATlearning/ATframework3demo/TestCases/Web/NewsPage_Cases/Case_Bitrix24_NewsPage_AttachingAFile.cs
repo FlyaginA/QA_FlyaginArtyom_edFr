@@ -5,7 +5,7 @@ using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects.Drive;
 
-namespace ATframework3demo.TestCases.NewsPage_Cases
+namespace ATframework3demo.TestCases.Web.NewsPage_Cases
 {
     public class Case_Bitrix24_NewsPage_AttachingAFile : CaseCollectionBuilder
     {
@@ -35,7 +35,7 @@ namespace ATframework3demo.TestCases.NewsPage_Cases
                     //удаляем пост с таким файлом
 
                     .Delete();
-                    //удаляем из диска
+                //удаляем из диска
             }
             homePage
                 //проверяем отсутствие загружаемого файла на диске 
@@ -81,14 +81,14 @@ namespace ATframework3demo.TestCases.NewsPage_Cases
                 //прикрепить файл
                 .fileInput
                 .UploadFile(filepath);
-            
+
 
             //проверить что прикрепленный файл существует
             homePage
                 .NewsPage
                 .PostForm
                 .Assert_AttachedFiles()
-                
+
                 //Опубликовать пост
                 .SendPost();
             //Обновить страницу, проверить наличие загруженного файла на странице

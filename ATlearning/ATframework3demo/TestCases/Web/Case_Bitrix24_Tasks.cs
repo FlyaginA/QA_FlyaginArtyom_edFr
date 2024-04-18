@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace atFrameWork2.TestCases
+namespace ATframework3demo.TestCases.Web
 {
     public class Case_Bitrix24_Tasks : CaseCollectionBuilder
     {
@@ -50,14 +50,14 @@ namespace atFrameWork2.TestCases
             var btnSaveTask = new WebItem("//button[@data-bx-id='task-edit-submit' and @class='ui-btn ui-btn-success']", "Кнопка сохранения задачи");
             btnSaveTask.Click();
             WebDriverActions.SwitchToDefaultContent();
-            var gridTaskLink = new WebItem($"//a[contains(text(), '{task.Title}') and contains(@class, 'task-title')]", 
+            var gridTaskLink = new WebItem($"//a[contains(text(), '{task.Title}') and contains(@class, 'task-title')]",
                 $"Ссылка на задачу '{task.Title}' в гриде");
             gridTaskLink.WaitElementDisplayed();
             gridTaskLink.Click();
             sliderFrame.SwitchToFrame();
             //открыть задачу, ассертнуть тайтл и дескрипшн
             var taskTitleArea = new WebItem($"//div[@class='tasks-iframe-header']//span[@id='pagetitle']",
-                "Область заголовка задачи"); 
+                "Область заголовка задачи");
             taskTitleArea.WaitElementDisplayed(10);
             taskTitleArea.AssertTextContains(task.Title, "Название задачи отображается неверно");
             var taskDescriptionArea = new WebItem($"//div[@id='task-detail-description']",

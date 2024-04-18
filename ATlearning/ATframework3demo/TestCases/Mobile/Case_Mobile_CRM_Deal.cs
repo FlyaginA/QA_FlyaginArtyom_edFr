@@ -4,7 +4,7 @@ using ATframework3demo.PageObjects.Mobile;
 using atFrameWork2.BaseFramework.LogTools;
 using atFrameWork2.SeleniumFramework;
 
-namespace ATframework3demo.TestCases
+namespace ATframework3demo.TestCases.Mobile
 {
     public class Case_Mobile_CRM_Deal : CaseCollectionBuilder
     {
@@ -19,10 +19,10 @@ namespace ATframework3demo.TestCases
         void Create_Deal(MobileHomePage homePage)
         {
             //обработка сценария "знакомство с Битрикс24"
-            var Skip = new MobileItem("//android.widget.TextView[@text=\"Далее\"]", "Кнопка 'Далее'"); 
+            var Skip = new MobileItem("//android.widget.TextView[@text=\"Далее\"]", "Кнопка 'Далее'");
             bool isWelcomePresent = Waiters.WaitForCondition(() => Skip.WaitElementDisplayed(), 2, 6,
                $"ожидание кнопки далее");
-            while ( isWelcomePresent )
+            while (isWelcomePresent)
             {
                 Skip.Click();
                 isWelcomePresent = Waiters.WaitForCondition(() => Skip.WaitElementDisplayed(), 2, 6,
@@ -43,7 +43,7 @@ namespace ATframework3demo.TestCases
             //Войти в раздел "еще"
             .More()
             //Выбрать CRM
-            .CRM()            
+            .CRM()
             //Кнопка "создать"
             .CreateDeal(TestCRMDeal)
             //кликнуть "Вернуться"

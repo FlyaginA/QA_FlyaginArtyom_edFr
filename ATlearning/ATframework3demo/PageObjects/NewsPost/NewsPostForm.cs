@@ -30,12 +30,12 @@ namespace ATframework3demo.PageObjects.NewsPost
             return isRecipientPresent;
         }
 
-        
 
-        
+
+        //Опубликовать пост, нажав на кнопку "отправить"
         internal NewsPage SendPost()
         {
-            //Опубликовать пост, нажав на кнопку "отправить"
+            
             new WebItem($"{XPathLocators[0]}/descendant::span[@id=\"blog-submit-button-save\"]", "кнопка публикации")
                 .Click();
             return new NewsPage();
@@ -60,6 +60,16 @@ namespace ATframework3demo.PageObjects.NewsPost
             {
                 Log.Error("File was not attached!!!");
             }
+            return this;
+        }
+        //Ввод текста сообщения
+        public NewsPostForm EnterText(string text)
+        {
+            //входим в фрейм текстового поля
+            WebItem ThisScreen = new WebItem("//iframe [@class = \"bx-editor-iframe\"]", "Фрейм текствого поля");
+            ThisScreen.SwitchToFrame();
+            new WebItem("//body[@contenteditable = \"true\"]", "поле ввода текста").SendKeys(text);
+            WebItem.DefaultDriver.SwitchTo().ParentFrame();
             return this;
         }
     }

@@ -3,7 +3,7 @@ using atFrameWork2.SeleniumFramework;
 
 namespace ATframework3demo.PageObjects.NewsPost
 {
-    internal class PostMenu : WebItem
+    public class PostMenu : WebItem
     {
         public PostMenu(string xpathLocator, string description) : base(xpathLocator, description)
         {

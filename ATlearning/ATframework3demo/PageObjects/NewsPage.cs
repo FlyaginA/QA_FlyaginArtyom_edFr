@@ -1,6 +1,7 @@
 ﻿using ATframework3demo.PageObjects.NewsPost;
 using atFrameWork2.SeleniumFramework;
 using atFrameWork2.BaseFramework.LogTools;
+using System.Xml.XPath;
 
 namespace ATframework3demo.PageObjects
 {
@@ -16,7 +17,7 @@ namespace ATframework3demo.PageObjects
             return new NewsPostForm();
         }
 
-        //проверяет отсутствие загружаемого в носотную ленту файла если присутствует, возвращает False
+        //проверяет отсутствие загружаемого в новостную ленту файла если присутствует, возвращает False
         public bool PrerequisiteCaseBitrix24NewsPageAttachingFile(string filename)
         {
             
@@ -30,7 +31,7 @@ namespace ATframework3demo.PageObjects
             bool assert = (new WebItem($"//a[@data-title=\"{filename}\"]", "элемент с указанным названием")
                 .WaitElementDisplayed());
             
-            if (assert = false)
+            if (assert == false)
             {
                 Log.Error("File was not attached");
             }
@@ -45,13 +46,16 @@ namespace ATframework3demo.PageObjects
 
         
         //поиск новости по строке
-        internal NewsBlock FindNewsByString(string SampleText)
+        public NewsBlock FindNewsByString(string SampleText)
         {
             //Найти объект в котором присутствует строка
-            NewsBlock NewsFormWithText = new NewsBlock($"//*[text()=\"{SampleText}\"]" +
-            //перейти на родительский объект новостного блока
-                $"/ancestor::div[@class=\"feed-post-block feed-post-block-files feed-post-block-separator feed-post-block-pin feed-post-block-has-bottom feed-post-block-short\"]" +
-                $"", "новостной блок содержащий заданную строку");
+            NewsBlock NewsFormWithText = new NewsBlock($"" +
+                //Контейнер, содержащий в себе все сообщения новостной ленты
+                $"//div [@id =\"log_internal_container\"]" +
+                //Найти объект в котором присутствует строка
+                $"//descendant::div[@class = \"feed-post-text\" and text()=\"{SampleText}\"]" +
+                //перейти на родительский объект новостного блока
+                $"/ancestor::div[@class = \"feed-item-wrap\"]", "новостной блок содержащий заданную строку");
             return NewsFormWithText;
 
 

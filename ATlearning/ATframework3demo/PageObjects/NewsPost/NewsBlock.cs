@@ -23,7 +23,7 @@ namespace ATframework3demo.PageObjects.NewsPost
            
         }
 
-        internal PostMenu OpenPostMenu()
+        public PostMenu OpenPostMenu()
         {
             //Кликнуть по объекту открывающему меню
             Menu.Click();

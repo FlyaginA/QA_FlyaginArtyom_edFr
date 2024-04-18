@@ -4,7 +4,7 @@ using atFrameWork2.SeleniumFramework;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq.Expressions;
 using ATframework3demo.PageObjects;
-using ATframework3demo.TestCases.NewsPage_Cases;
+using ATframework3demo.TestCases.Web.NewsPage_Cases;
 
 namespace ATframework3demo.PageObjects.NewsPost
 {

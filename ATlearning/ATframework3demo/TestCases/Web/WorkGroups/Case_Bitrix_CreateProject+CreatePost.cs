@@ -64,6 +64,7 @@ namespace ATframework3demo.TestCases.Web.WorkGroups
                     //открыть проект с нашим названием
                     .OpenWorkGroup()
                     //проверить наличие созданного поста
+                    .Search(PostText)
                     .PostByTextExist(PostText);
 
             if (!ProjectPostExists)

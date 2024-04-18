@@ -44,6 +44,11 @@ namespace ATframework3demo.PageObjects.WorkGroups
 
         }
 
-        
+        public WorkGroupPage Search(string sampletext)
+        {
+            NewsPage ThisScreen = new NewsPage();
+            ThisScreen.Search(sampletext);
+            return this;
+        }
     }
 }

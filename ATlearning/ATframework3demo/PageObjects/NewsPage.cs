@@ -42,10 +42,11 @@ namespace ATframework3demo.PageObjects
             return assert ;
         }
 
-        
+        //использование функционала поиска
+
 
         
-        //поиск новости по строке
+        //поиск новости на экране
         public NewsBlock FindNewsByString(string SampleText)
         {
             //Найти объект в котором присутствует строка
@@ -61,13 +62,13 @@ namespace ATframework3demo.PageObjects
 
         }
 
-
-
-
-
-
-
-
-
+        public NewsPage Search(string sampletext)
+        {
+            //открытие окна фильтра и поиска
+            WebItem FilterAndSearch = new WebItem("//input[ @placeholder = \"Фильтр + поиск\"]", "окно Фильтра и поиска");
+            FilterAndSearch.Click();
+            FilterAndSearch.SendKeys(sampletext);
+            return this;
+        }
     }
 }

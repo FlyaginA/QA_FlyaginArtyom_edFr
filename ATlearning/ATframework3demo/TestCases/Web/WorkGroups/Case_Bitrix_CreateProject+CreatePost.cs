@@ -4,6 +4,7 @@ using atFrameWork2.PageObjects;
 using atFrameWork2.SeleniumFramework;
 using ATframework3demo.PageObjects;
 using ATframework3demo.PageObjects.WorkGroups;
+using ATframework3demo.TestEntities;
 
 
 namespace ATframework3demo.TestCases.Web.WorkGroups
@@ -19,11 +20,11 @@ namespace ATframework3demo.TestCases.Web.WorkGroups
 
         void CreateProjectCreatePost(PortalHomePage homePage)
         {
-            //задаем название нашему проекту
-            string WorkGroupName = "Test" + DateTime.Now.Ticks;
-            //Задаем текст сообщения, которое будем отправлять на странице проекта
-            string PostText = "TestPost" + DateTime.Now.Ticks;
-            bool WorkGroupWasCreated =
+            //задаем название нашему проекту и создадим его сущность
+            TestWorkgroup workgroup = new TestWorkgroup("Test" + DateTime.Now.Ticks);
+            //Задаем текст сообщения, которое будем отправлять на странице проекта и создадим его сущность
+            TestPost post = new TestPost("TestPost" + DateTime.Now.Ticks);
+            bool WorkGroupWasCreated = 
             homePage
                 //Перейти в раздел "группы"
                 .LeftMenu
@@ -34,7 +35,7 @@ namespace ATframework3demo.TestCases.Web.WorkGroups
                 .ChooseProject()
                 .NextStep()
             //Вписать название, следующий шаг
-                .EnterNameProject(WorkGroupName)
+                .EnterNameProject(workgroup.WorkGroupName)
                 .NextStep()
             //выбрать открытый, следующий шаг
                 .ChooseOpen()
@@ -44,14 +45,15 @@ namespace ATframework3demo.TestCases.Web.WorkGroups
             //выбрать окно написания поста
                 .AddPost()
             //написать текст тестового сообщения
-                .EnterText(PostText)
+                .EnterText(post.PostText)
             //отправить сообщение
                 .SendPost()
             //Закрыть Слайдер
                 .CloseSlider()
             //Проверить наличие проекта с нашим названием
-                .Search(WorkGroupName)
-                .Assert_WorkGroupExistByName(WorkGroupName);
+                .Search(workgroup.WorkGroupName)
+                .ChooseWorkGroupItem(workgroup.XPath)
+                .WaitElementDisplayed();
             if (!WorkGroupWasCreated)
             {
                 Log.Error("Проект с заданным названием не отображается");
@@ -60,12 +62,12 @@ namespace ATframework3demo.TestCases.Web.WorkGroups
             bool ProjectPostExists =
                 new WorkGroupsPage()
                     //выберем в списке элемент соответстующий нашему названию
-                    .ChooseWorkGroupItem(WorkGroupName)
+                    .ChooseWorkGroupItem(workgroup.XPath)
                     //открыть проект с нашим названием
                     .OpenWorkGroup()
                     //проверить наличие созданного поста
-                    .Search(PostText)
-                    .PostByTextExist(PostText);
+                    .Search(post.PostText)
+                    .PostByTextExist(post.PostText);
 
             if (!ProjectPostExists)
             {

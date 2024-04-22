@@ -4,6 +4,7 @@ using atFrameWork2.BaseFramework.LogTools;
 using atFrameWork2.SeleniumFramework;
 using ATframework3demo.PageObjects.WorkGroups.CreateSteps;
 using Microsoft.AspNetCore.Components.Web;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium.Interfaces;
 using OpenQA.Selenium.DevTools.V121.IndexedDB;
 
@@ -24,13 +25,9 @@ namespace ATframework3demo.PageObjects.WorkGroups
 
 
         //поиск по странице элемента типа WorkGroupItem названием по заданной строке и возврат этого  элемента
-        public WorkGroupItem ChooseWorkGroupItem(string workGroupName)
+        public WorkGroupItem ChooseWorkGroupItem(string xpath)
         {
-            WorkGroupItem OurChoose = new WorkGroupItem($"//a[contains(text(),'{workGroupName}')]" +
-                $"//ancestor::tr [@class = \"main-grid-row main-grid-row-body\" " +
-                $"or @class = \"main-grid-row main-grid-row-body sonet-ui-grid-row-pinned\"]",
-                "Находим объект в меню, соответствующий заданному названию");
-
+            WorkGroupItem OurChoose = new WorkGroupItem(xpath, "объект списка проектов/групп");
             return OurChoose;
         }
         //Использование функционала поиска по странице (Фильтр+Поиск)
@@ -40,16 +37,9 @@ namespace ATframework3demo.PageObjects.WorkGroups
             SearchField.WaitElementDisplayed(10);
             SearchField .Click();
             SearchField.SendKeys(workGroupName);
+            SearchField.SendKeys(Keys.Enter);
             return this;
         }
-        //Проверка существования элемента типа WorkGroupItem 
-        //с указанным названием на текущей странице
-        public bool Assert_WorkGroupExistByName(string workGroupName)
-        {
-            WebDriverActions.Refresh();
-            WorkGroupItem TestGroup = new WorkGroupItem($"//a[contains(text(),'{workGroupName}')]", "Находим объект с указанным названием");
-            bool AssertValue = TestGroup.WaitElementDisplayed();
-            return AssertValue;
-        }
+
     }
 }
